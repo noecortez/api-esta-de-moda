@@ -9,11 +9,14 @@ class ProductoController extends Controller
 {
     public function index()
     {
-        // Basic authentication...
-        // $response = Http::withBasicAuth(env('WC_CONSUMER_KEY'), env('WC_CONSUMER_SECRET'))->get(env('WC_STORE_URL'));
-        // return $response->json();
+        $response = Http::withBasicAuth(
+            env('WC_CONSUMER_KEY'),
+            env('WC_CONSUMER_SECRET')
+        )->get(env('WC_STORE_URL') . '/products');
 
-        $productos = app('db')->connection('mysql2')->select('SELECT * FROM wp_wc_product_meta_lookup');
-        return response()->json($productos);
+        return $response->json();
+
+        // $productos = app('db')->connection('mysql2')->select('SELECT * FROM wp_wc_product_meta_lookup');
+        // return response()->json($productos);
     }
 }
