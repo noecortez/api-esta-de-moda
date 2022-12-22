@@ -21,3 +21,4 @@ $router->get('/productos', 'ProductoController@index');
 $router->get('/ordenes', 'OrdenController@index');
 
 $router->post('/ordenes', 'OrdenController@crearOrden');
+$router->get('/get', 'ProductoController@getProduct');

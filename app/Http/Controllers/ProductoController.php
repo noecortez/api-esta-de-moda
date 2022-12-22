@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 
 class ProductoController extends Controller
@@ -15,8 +16,10 @@ class ProductoController extends Controller
         )->get(env('WC_STORE_URL') . '/products');
 
         return $response->json();
+    }
 
-        // $productos = app('db')->connection('mysql2')->select('SELECT * FROM wp_wc_product_meta_lookup');
-        // return response()->json($productos);
+    public function getProduct() {
+        $productos = DB::select('SELECT * FROM bodega');
+        return response()->json($productos);
     }
 }
