@@ -21,22 +21,6 @@ class OrdenController extends Controller
 
     public function crearOrden(Request $request)
     {
-        /* $result = DB::connection('mysql')->insert(
-            'INSERT INTO ventas (total, metodo, cambio, fecha, cliente, hora) VALUES (?,?,?,?,?,?)',
-            [
-                $request->total,
-                $request->metodo,
-                $request->cambio,
-                $request->fecha,
-                $request->cliente,
-                $request->hora
-            ]
-        );
-
-        if (!$result) {
-            return response()->json('Registro no insertado', 400);
-        } */
-
-        return response()->json($request->total);
+        print_r($request->all());
     }
 }
