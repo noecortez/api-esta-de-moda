@@ -4,7 +4,10 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
+
+use function PHPSTORM_META\type;
 
 class SyncProducts extends Command
 {
@@ -39,6 +42,22 @@ class SyncProducts extends Command
      */
     public function handle()
     {
-        $productos = DB::select('SELECT * FROM bodega');
+        $response = Http::withBasicAuth(
+            env('WC_CONSUMER_KEY'),
+            env('WC_CONSUMER_SECRET')
+        )->get(env('WC_STORE_URL') . '/products');
+
+        $productosWC = $response->json();
+
+        $productosLocalBodega = DB::select('SELECT * FROM bodega');
+
+        if ( count($productosLocalBodega) !== count($productosWC) ) {
+            // Codigo para sincronizar
+        }
+
+        /* foreach ($productosWC as $producto) {
+            print_r($producto['name']);
+        } */
+
     }
 }
